@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Article
+from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
 
 # Create your views here.
@@ -17,9 +17,12 @@ def detail(request, id):
     article = Article.objects.get(id=id)
     form = CommentForm()
 
+    comments = Comment.objects.filter(article_id=id)
+
     context = {
         'article': article,
         'form': form,
+        'comments': comments,
     }
 
     return render(request, 'detail.html', context)
@@ -44,6 +47,7 @@ def create(request):
 def comment_create(request, article_id):
     if request.method == 'POST':
         form = CommentForm(request.POST)
+        print(form)
         if form.is_valid():
             comment = form.save(commit=False)
 
