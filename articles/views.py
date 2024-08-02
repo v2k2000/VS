@@ -19,11 +19,24 @@ def detail(request, id):
 
     comments = Comment.objects.filter(article_id=id)
 
-    commnts_vs = 
+
+    choices = list(comments.values_list('choice', flat=True))
+    count_a = choices.count('A')
+    count_b = choices.count('B')
+    total = count_a + count_b
+    if total == 0:
+        share_a = 0
+        share_b = 0
+    else:
+        share_a = round(count_a / total * 100)
+        share_b = round(count_b / total * 100)
+
     context = {
         'article': article,
         'form': form,
         'comments': comments,
+        'share_a': share_a,
+        'share_b': share_b,
     }
 
     return render(request, 'detail.html', context)
@@ -32,9 +45,12 @@ def detail(request, id):
 def create(request):
     if request.method == 'POST':
         form = ArticleForm(request.POST)
-        if form.is_valid():
-            article = form.save()
-            return redirect('articles:detail', id=article.id)
+        # if form.is_valid():
+        #     article = form.save()
+        #     return redirect('articles:detail', id=article.id)
+        article = form.save()
+        return redirect('articles:detail', id=article.id)
+
     else:
         form = ArticleForm()
 

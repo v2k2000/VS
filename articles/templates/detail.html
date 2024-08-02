@@ -2,8 +2,14 @@
 
 {% block body %}
 
-
-    ????
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{ share_a|floatformat:2 }}%;" aria-valuenow="{{ share_a }}" aria-valuemin="0" aria-valuemax="1">{{share_a}}%</div>
+        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ share_b|floatformat:2 }}%;" aria-valuenow="{{ share_b }}" aria-valuemin="0" aria-valuemax="1">{{share_b}}%</div>
+    </div>
+    <div>
+        {{share_a}}
+        {{share_b}}
+    </div>
 
 
     <h1 class="my-5">{{article.title}}</h1>
