@@ -2,13 +2,13 @@ from django import forms
 from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
-    title = forms.CharField(
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control bg-primary',
-            }
-        )
-    )
+    # title = forms.CharField(
+    #     widget=forms.TextInput(
+    #         attrs={
+    #             'class': 'form-control bg-primary',
+    #         }
+    #     )
+    # )
 
     class Meta():
         model = Article
@@ -16,7 +16,7 @@ class ArticleForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'optionA': forms.TextInput(attrs={'class': 'form-control'}),
-            'optionB': forms.Textarea(attrs={'class': 'form-control'}),
+            'optionB': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 
@@ -27,6 +27,7 @@ class CommentForm(forms.ModelForm):
 
         widgets = {
             'choice': forms.RadioSelect(choices=[('A', 'A'), ('B', 'B')]),
+            'content': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
         exclude = ('article', )

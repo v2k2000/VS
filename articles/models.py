@@ -5,7 +5,7 @@ class Article(models.Model):
     title = models.CharField(max_length=300)
     optionA = models.TextField(default='')
     optionB = models.TextField(default='')
-    like = models.IntegerField(default=0)
+    # like = models.IntegerField(default=0)
 
     # comment_set = 
 

@@ -6,7 +6,7 @@
         <form action="" method="POST">
             {% csrf_token %}
             <div class="form-group">
-                <label for="id_title">제목:</label>
+                <label for="id_title">질문:</label>
                 {{ form.title }}
             </div>
             <div class="form-row">
@@ -22,7 +22,7 @@
             <input type="submit" value="제출">
         </form>
     </body>
-    <form action="" method="POST">
+    <!-- <form action="" method="POST">
         {% csrf_token %}
         {{form}}
         {% comment %} <div class="form-group row">
@@ -50,5 +50,5 @@
             </div>
           </div> {% endcomment %}
         <input type="submit" value="제출">
-    </form>
+    </form> -->
 {% endblock %}

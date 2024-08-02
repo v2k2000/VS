@@ -3,51 +3,54 @@
 {% block body %}
 
     <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: {{ share_a|floatformat:2 }}%;" aria-valuenow="{{ share_a }}" aria-valuemin="0" aria-valuemax="1">{{share_a}}%</div>
-        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ share_b|floatformat:2 }}%;" aria-valuenow="{{ share_b }}" aria-valuemin="0" aria-valuemax="1">{{share_b}}%</div>
+        <div class="progress-bar progress-bar-blue" role="progressbar" style="width: {{ share_a|floatformat:2 }}%;" aria-valuenow="{{ share_a }}" aria-valuemin="0" aria-valuemax="1">{{share_a}}%</div>
+        <div class="progress-bar progress-bar-pink" role="progressbar" style="width: {{ share_b|floatformat:2 }}%;" aria-valuenow="{{ share_b }}" aria-valuemin="0" aria-valuemax="1">{{share_b}}%</div>
     </div>
-    <div>
+    <!-- <div>
         {{share_a}}
         {{share_b}}
-    </div>
+    </div> -->
 
 
-    <h1 class="my-5">{{article.title}}</h1>
+    <h1 class="my-5"></h1>
     <p>{{article.content}}</p>
 
-    <h1 class="my-5 center-align">{{article.title}}</h1>
+    <!-- <h1 class="my-5 center-align">{{article.title}}</h1> -->
     <div class="center-align">
-        <p>{{article.content}}</p>
+        <!-- <p>{{article.content}}</p> -->
     </div>
-    <hr>
+
+
     <div class="row">
         <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><strong>{{article.title}}</strong></h5>
-              <p class="card-text">{{article.optionA}}.</p>
-              <a href="#" class="btn bg-info text-">Like</a>
+            <div class="card">
+                <div class="card-body" style="background-color: #5ba7f9; color: #ffffff;">
+                    <h5 class="card-title"><strong>{{article.title}}</strong></h5>
+                    <p class="card-text">A. {{article.optionA}}.</p>
+                    <!-- <a href="#" class="btn bg-info text-">Like</a> -->
+                </div>
             </div>
-          </div>
         </div>
         <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"><strong>{{article.title}}</strong></h5>
-              <p class="card-text">{{article.optionB}}</p>
-              <a href="#" class="btn bg-info">Like</a>
+            <div class="card">
+                <div class="card-body" style="background-color: #fb8e8e; color: #ffffff;">
+                    <h5 class="card-title"><strong>{{article.title}}</strong></h5>
+                    <p class="card-text">B. {{article.optionB}}</p>
+                    <!-- <a href="#" class="btn bg-info">Like</a> -->
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <!-- <a href="#" class="btn text- " style="background-color: #dce1c1; ;">재밌어요</a> -->
+    
     </div>
+</div>
 
     <hr>
     <div class="answer">
         <form action="{% url 'articles:comment_create' article_id=article.id %}" method="POST">
             {% csrf_token%}
              {% comment %} <fieldset class="row mb-3">
-                <legend class="col-form-label col-sm-2 pt-0">Answer</legend>
+                <legend class="col-form-label col-sm-2 pt-0"></legend>
                 <div class="col-sm-10">
                   <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="A" checked>
@@ -63,7 +66,7 @@
                   </div>
                 </div>
               </fieldset>  {% endcomment %}
-            <legend class="col-form-label col-sm-2 pt-0"><h5>Answer</h5></legend>
+            <legend class="col-form-label col-sm-2 pt-0"><h5>선택</h5></legend>
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="choice" id="radio1" value="A">
                 <label class="form-check-label" for="gridRadios1">
@@ -77,6 +80,7 @@
                 </label>
               </div>
             <div>
+                당신의 생각을 아래에 적어주세요
                 {{form.content}}
             </div>
             <input type="submit">
@@ -84,11 +88,18 @@
     </div>
     <!-- <p">댓글 출력 방법 2</p> -->
      <hr>
-     <h1><strong>Answer</strong></h1>
+     <h3><strong>답변</strong></h3>
     {% for comment in comments %}
-        <div class="alert alert-primary" role="alert">
-            <li>{{comment.choice}} - {{comment.content}}</li>
-        </div>
+        {% if comment.choice == 'A' %}
+            <div class="alert alert-primary" role="alert">
+                <li>{{comment.choice}} - {{comment.content}}</li>
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                <li>{{comment.choice}} - {{comment.content}}</li>
+            </div>
+
+        {% endif %}
     {% endfor %}
 
 {% endblock %}

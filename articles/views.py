@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Article, Comment
 from .forms import ArticleForm, CommentForm
+import random
 
 # Create your views here.
 def index(request):
@@ -19,7 +20,6 @@ def detail(request, id):
 
     comments = Comment.objects.filter(article_id=id)
 
-<<<<<<< HEAD
 
     choices = list(comments.values_list('choice', flat=True))
     count_a = choices.count('A')
@@ -32,9 +32,6 @@ def detail(request, id):
         share_a = round(count_a / total * 100)
         share_b = round(count_b / total * 100)
 
-=======
-    #commnts_vs = 
->>>>>>> 4acfa4da03fb075ea6d888b4c9537cc4da821796
     context = {
         'article': article,
         'form': form,
@@ -47,13 +44,14 @@ def detail(request, id):
 
 
 def create(request):
+
+
     if request.method == 'POST':
         form = ArticleForm(request.POST)
-        # if form.is_valid():
-        #     article = form.save()
-        #     return redirect('articles:detail', id=article.id)
-        article = form.save()
-        return redirect('articles:detail', id=article.id)
+        if form.is_valid():
+            article = form.save()
+            return redirect('articles:detail', id=article.id)
+
 
     else:
         form = ArticleForm()
@@ -94,3 +92,28 @@ def comment_delete(request, article_id, id):
     
     return redirect('articles:detail', id=article_id)
 
+
+def random(request):
+
+    # ss = Article.objects.all()
+
+    # one = list(ss.values_list('id', flat=True))
+
+    # id = random.choice(one)
+
+    # cnotext = {
+    #     'id': id
+    # }
+
+    # return redirect('articles',context)
+
+    def random_article(request):
+        articles = Article.objects.all()
+        article_ids = list(articles.values_list('id', flat=True))
+        
+        if not article_ids:
+            return redirect('some_default_view')
+        
+        random_id = random.choice(article_ids)
+        
+        return redirect('article', id=random_id)
