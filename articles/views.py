@@ -19,7 +19,7 @@ def detail(request, id):
 
     comments = Comment.objects.filter(article_id=id)
 
-    commnts_vs = 
+    #commnts_vs = 
     context = {
         'article': article,
         'form': form,

@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
-
 {% block body %}
-    {% for article in articles %}
-        <p>{{article.title}}</p>
-        <a href="{% url 'articles:detail' id=article.id %}">detail</a>
-        <hr>
+
+<tr class="text-center">
+<h1><strong>Questions</strong></h1>
+<div class="container">
+    <table class="table">
+      <thead class="thead-light">
+        <tr class="text-center">
+          <th scope="col">id</th>
+          <th scope="col">title</th>
+          <th scope="col">detail</th>
+        </tr>
+      </thead>
+      <tbody>
+      </div>
+    {% for article in articles %} 
+        <tr class="text-center">
+        <th scope="row">
+            <span>{{article.id}}</span>
+        </th>
+        <td>
+        <span>{{article.title}}</span>
+        </td>
+        <td>
+            <a href="{% url 'articles:detail' id=article.id %}">
+                <span>detail</span></a>
+        </td>
+
     {% endfor %}
 {% endblock %}

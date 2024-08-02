@@ -3,35 +3,80 @@
 {% block body %}
 
 
-    ????
-
-
-    <h1 class="my-5">{{article.title}}</h1>
-    <p>{{article.content}}</p>
-    <hr>
-    <div>
-        {{article.optionA}}       
+    <h1 class="my-5 center-align">{{article.title}}</h1>
+    <div class="center-align">
+        <p>{{article.content}}</p>
     </div>
-    <div>
-        {{article.optionB}}
-    </div>
-
-
     <hr>
-    <form action="{% url 'articles:comment_create' article_id=article.id %}" method="POST">
-        {% csrf_token%}
-        <input type="radio" name="choice" value="A"> A
-        <input type="radio" name="choice" value="B"> B
-        <div>
-            {{form.content}}
+    <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><strong>{{article.title}}</strong></h5>
+              <p class="card-text">{{article.optionA}}.</p>
+              <a href="#" class="btn bg-info text-">Like</a>
+            </div>
+          </div>
         </div>
-        <input type="submit">
-    </form>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><strong>{{article.title}}</strong></h5>
+              <p class="card-text">{{article.optionB}}</p>
+              <a href="#" class="btn bg-info">Like</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <div class="answer">
+        <form action="{% url 'articles:comment_create' article_id=article.id %}" method="POST">
+            {% csrf_token%}
+             {% comment %} <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">Answer</legend>
+                <div class="col-sm-10">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="A" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                      A
+                    </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="B">
+                    <label class="form-check-label" for="gridRadios2">
+                      B
+                    </label>
+                  </div>
+                </div>
+              </fieldset>  {% endcomment %}
+            <legend class="col-form-label col-sm-2 pt-0"><h5>Answer</h5></legend>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="choice" id="radio1" value="A">
+                <label class="form-check-label" for="gridRadios1">
+                 A
+                </label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="choice" id="radio2" value = "B">
+                <label class="form-check-label" for="gridRadios2">
+                 B
+                </label>
+              </div>
+            <div>
+                {{form.content}}
+            </div>
+            <input type="submit">
+        </form>
+    </div>
     <!-- <p">댓글 출력 방법 2</p> -->
      <hr>
-     <h1>답변</h1>
+     <h1><strong>Answer</strong></h1>
     {% for comment in comments %}
-        <li>{{comment.choice}} - {{comment.content}}</li>
+        <div class="alert alert-primary" role="alert">
+            <li>{{comment.choice}} - {{comment.content}}</li>
+        </div>
     {% endfor %}
 
 {% endblock %}
