@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <h1>{{article.title}}</h1>
+    <h1 class="my-5">{{article.title}}</h1>
     <p>{{article.content}}</p>
 
     <hr>
@@ -19,7 +19,7 @@
         </form>
     {% endfor %}
 
-    <p>댓글 출력 방법 2</p>
+    <p">댓글 출력 방법 2</p>
     {% for comment in comments %}
         <li>{{comment.content}}</li>
     {% endfor %}

@@ -2,6 +2,14 @@ from django import forms
 from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control bg-primary',
+            }
+        )
+    )
+
     class Meta():
         model = Article
         fields = '__all__'
