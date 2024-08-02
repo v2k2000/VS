@@ -2,11 +2,22 @@ from django import forms
 from .models import Article, Comment
 
 class ArticleForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control bg-primary',
+            }
+        )
+    )
 
     class Meta():
         model = Article
-        # fields = '__all__'
-        exclude = ('like', )
+        fields = '__all__'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'optionA': forms.TextInput(attrs={'class': 'form-control'}),
+            'optionB': forms.Textarea(attrs={'class': 'form-control'}),
+        }
 
 
 class CommentForm(forms.ModelForm):

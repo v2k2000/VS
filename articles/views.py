@@ -19,6 +19,7 @@ def detail(request, id):
 
     comments = Comment.objects.filter(article_id=id)
 
+<<<<<<< HEAD
 
     choices = list(comments.values_list('choice', flat=True))
     count_a = choices.count('A')
@@ -31,6 +32,9 @@ def detail(request, id):
         share_a = round(count_a / total * 100)
         share_b = round(count_b / total * 100)
 
+=======
+    #commnts_vs = 
+>>>>>>> 4acfa4da03fb075ea6d888b4c9537cc4da821796
     context = {
         'article': article,
         'form': form,
